@@ -109,7 +109,45 @@ Located in BambooValley Supabase project: `xunccqdrybxpwcvafvag`
 - **Status:** Active - needs LLM API key to be fully functional
 
 ## Session Logs
-See `logs/SESSION-LOG-INDEX.md` for all sessions.
+
+Session logs are organized by month with individual files per session.
+
+**Structure:**
+```
+logs/
+└── 2025-12/
+    ├── INDEX.md              # One-liner per session
+    └── 01-vibbber-setup.md   # Full session details
+```
+
+**Looking up past sessions:**
+1. Open `logs/YYYY-MM/INDEX.md` for the relevant month
+2. Find session by one-liner description
+3. Open the full session file for details
+
+## Wrap Protocol
+
+When wrapping a session:
+
+1. **Determine Session Number:** Check `logs/YYYY-MM/INDEX.md`, find highest number, add 1
+2. **Create Session Log:** `logs/YYYY-MM/NN-short-title.md` with summary, changes, next steps
+3. **Update Monthly Index:** Add one-liner to `logs/YYYY-MM/INDEX.md`
+4. **Inform User:** "Session N wrapped successfully"
+5. **Commit & Push:** All changes to GitHub
+
+## Autonomous Development Workflow
+
+### The Golden Rule
+```bash
+1. Make code changes
+2. git add -A && git commit -m "feat: description"
+3. git push https://vibbber:$GITHUB_TOKEN@github.com/vibbber/42.git main
+4. Netlify auto-deploys (check status if needed)
+5. Test the deployed changes
+6. If broken, fix and repeat
+```
+
+**Note:** Use the vibbber GitHub token for pushes (stored in .env)
 
 ## Roadmap
 1. [x] Basic bot with self-modification
