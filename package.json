@@ -1,0 +1,12 @@
+{
+  "name": "vibbber-42",
+  "version": "1.0.0",
+  "description": "Self-improving Telegram bot powered by Kimi K2",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@netlify/functions": "^2.4.0",
+    "node-fetch": "^3.3.2"
+  }
+}
