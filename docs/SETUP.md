@@ -144,6 +144,9 @@ The MCP server (`mcp/index.js`) provides tools for Claude Code to interact with 
 | `get_messages` | Fetch recent messages | `chat_id` (optional), `limit` (default 50, max 200) |
 | `get_chats` | List all chat IDs | none |
 | `send_message` | Send to Telegram | `chat_id` (required), `text` (required) |
+| `call_instance` | Send request to another instance | `instance_name` (required), `request` (required), `chat_id` (required), `from_instance` (optional) |
+
+**Note:** Use `call_instance` for instance-to-instance communication. Telegram doesn't relay bot messages to webhooks, so sending `/cc @reviewer` via `send_message` won't work. Use `call_instance` instead.
 
 ### Configuration
 

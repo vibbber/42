@@ -110,6 +110,32 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ['chat_id', 'text'],
       },
     },
+    {
+      name: 'call_instance',
+      description: 'Send a request directly to another Claude Code instance. Use this for instance-to-instance communication (bypasses Telegram webhook which does not relay bot messages).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          instance_name: {
+            type: 'string',
+            description: 'Target instance name without @ (e.g., "reviewer", "ideas", "coder")',
+          },
+          request: {
+            type: 'string',
+            description: 'The request/task to send to the target instance',
+          },
+          chat_id: {
+            type: 'number',
+            description: 'Chat ID where the target instance should send its response',
+          },
+          from_instance: {
+            type: 'string',
+            description: 'Your instance name (optional, for attribution)',
+          },
+        },
+        required: ['instance_name', 'request', 'chat_id'],
+      },
+    },
   ],
 }));
 
@@ -174,6 +200,37 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         } else {
           throw new Error(`Telegram error: ${result.description}`);
         }
+      }
+
+      case 'call_instance': {
+        if (!args.instance_name || !args.request || !args.chat_id) {
+          throw new Error('instance_name, request, and chat_id are required');
+        }
+
+        // Format request with @instance tag so poller picks it up
+        const formattedRequest = `@${args.instance_name} ${args.request}`;
+        const fromLabel = args.from_instance ? `@${args.from_instance}` : 'another instance';
+
+        // Insert directly into claude_requests table
+        const insertResult = await supabaseInsert('claude_requests', {
+          chat_id: args.chat_id,
+          user_id: 0, // System/bot request
+          username: args.from_instance || 'system',
+          first_name: fromLabel,
+          request: formattedRequest,
+          status: 'pending',
+        });
+
+        if (insertResult.error) {
+          throw new Error(`Supabase error: ${insertResult.error.message}`);
+        }
+
+        return {
+          content: [{
+            type: 'text',
+            text: `Request sent to @${args.instance_name}: "${args.request.substring(0, 50)}${args.request.length > 50 ? '...' : ''}"`,
+          }],
+        };
       }
 
       default:
