@@ -12,7 +12,7 @@ A self-improving Telegram bot that can modify its own code based on group chat d
 1. Add bot to group, make it admin
 2. Chat naturally about what you want to build
 3. Send 🚀 to trigger analysis
-4. Bot reads last 20 messages, proposes what to build
+4. Bot reads last 100 messages, proposes what to build
 5. Click 👍 to approve, 👎 to reject
 6. Bot modifies its own code, commits to GitHub, auto-deploys
 
@@ -149,10 +149,29 @@ When wrapping a session:
 
 **Note:** Use the vibbber GitHub token for pushes (stored in .env)
 
+## MCP Server (Claude Code Integration)
+
+The MCP server lets Claude Code read Telegram messages and respond directly.
+
+**Location:** `mcp/index.js`
+**Config:** `.mcp.json` (project-level, auto-loaded by Claude Code)
+
+### Available Tools
+| Tool | Description |
+|------|-------------|
+| `get_messages` | Fetch recent messages from Supabase (default 50, max 200) |
+| `get_chats` | List all chat IDs that have messaged the bot |
+| `send_message` | Send a message to any chat via Telegram |
+
+### Usage
+When running Claude Code in the Vibbber directory, the MCP server auto-connects. Then:
+- "Read the last 50 messages from chat -5040367963"
+- "Send a message to the group saying hello"
+
 ## Roadmap
 1. [x] Basic bot with self-modification
 2. [x] Message storage in Supabase
 3. [x] Rocket trigger + approval flow
-4. [ ] Get working LLM API key
-5. [ ] Build MCP server for Claude Code integration
+4. [x] MCP server for Claude Code integration
+5. [ ] Get working LLM API key
 6. [ ] Full approval → implementation flow

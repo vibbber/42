@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "vibbber": {
+      "command": "node",
+      "args": ["mcp/index.js"],
+      "env": {}
+    }
+  }
+}
