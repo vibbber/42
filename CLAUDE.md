@@ -86,10 +86,26 @@ CREATE TABLE vibbber_messages (
 CREATE INDEX idx_vibbber_messages_chat_created ON vibbber_messages(chat_id, created_at DESC);
 ```
 
+### Table: claude_requests
+```sql
+CREATE TABLE claude_requests (
+  id SERIAL PRIMARY KEY,
+  chat_id BIGINT NOT NULL,
+  user_id BIGINT,
+  username TEXT,
+  first_name TEXT,
+  request TEXT NOT NULL,
+  status TEXT DEFAULT 'pending',
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  responded_at TIMESTAMPTZ
+);
+```
+
 Located in BambooValley Supabase project: `xunccqdrybxpwcvafvag`
 
 ## Bot Commands
 - `/start` - Introduction message
+- `/cc <request>` - Send request to Claude Code (via poller)
 - `/status` - Show LLM provider, Supabase status
 - `/code` - Link to source code
 - `/modify <request>` - Direct code modification
@@ -149,24 +165,40 @@ When wrapping a session:
 
 **Note:** Use the vibbber GitHub token for pushes (stored in .env)
 
-## MCP Server (Claude Code Integration)
+## Claude Code Integration
 
+### MCP Server
 The MCP server lets Claude Code read Telegram messages and respond directly.
 
 **Location:** `mcp/index.js`
 **Config:** `.mcp.json` (project-level, auto-loaded by Claude Code)
 
-### Available Tools
 | Tool | Description |
 |------|-------------|
 | `get_messages` | Fetch recent messages from Supabase (default 50, max 200) |
 | `get_chats` | List all chat IDs that have messaged the bot |
 | `send_message` | Send a message to any chat via Telegram |
 
-### Usage
-When running Claude Code in the Vibbber directory, the MCP server auto-connects. Then:
-- "Read the last 50 messages from chat -5040367963"
-- "Send a message to the group saying hello"
+### Telegram → Claude Code (tmux + poller)
+Users can send `/cc <request>` in Telegram to wake up a Claude Code session.
+
+**Setup:**
+```bash
+# Terminal 1: Start Claude Code in tmux
+tmux new -s claude
+cd /Users/marcschwyn/Desktop/projects/Vibbber
+claude
+
+# Terminal 2: Start the poller
+cd /Users/marcschwyn/Desktop/projects/Vibbber
+node mcp/poller.js
+```
+
+**Flow:**
+1. User sends `/cc what files handle approvals?` in Telegram
+2. Bot stores request in `claude_requests` table, confirms receipt
+3. Poller detects new request, injects into tmux session
+4. Claude Code processes, responds via MCP `send_message` tool
 
 ## Roadmap
 1. [x] Basic bot with self-modification
