@@ -150,14 +150,19 @@ function checkTmuxSession() {
 }
 
 function sendToTmux(message) {
-  const escaped = message
+  // Replace newlines with spaces for single-line input
+  const singleLine = message.replace(/\n+/g, ' ').trim();
+
+  const escaped = singleLine
     .replace(/\\/g, '\\\\')
     .replace(/"/g, '\\"')
     .replace(/\$/g, '\\$')
     .replace(/`/g, '\\`');
 
   try {
-    execSync(`tmux send-keys -t ${TMUX_SESSION} "${escaped}" Enter`);
+    // Send text and Enter separately for reliability
+    execSync(`tmux send-keys -t ${TMUX_SESSION} "${escaped}"`);
+    execSync(`tmux send-keys -t ${TMUX_SESSION} Enter`);
     return true;
   } catch (e) {
     console.error('Failed to send to tmux:', e.message);
