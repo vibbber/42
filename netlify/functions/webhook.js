@@ -176,7 +176,7 @@ export async function handler(event) {
       await sendTelegram(chatId,
         `*Vibbber 42* - Self-Improving Bot\n\n` +
         `Chat naturally in your group. When ready to build:\n\n` +
-        `Send the rocket emoji to activate me. I'll read the last 20 messages, propose what to build, and wait for your approval.\n\n` +
+        `Send the rocket emoji to activate me. I'll read the last 100 messages, propose what to build, and wait for your approval.\n\n` +
         `Other commands:\n` +
         `/status - Check my status\n` +
         `/code - View my source code\n` +
@@ -250,7 +250,7 @@ export async function handler(event) {
     if (text.includes('🚀')) {
       await sendTelegram(chatId, `Analyzing your conversation...`);
 
-      const recentMessages = await getRecentMessages(chatId, 20);
+      const recentMessages = await getRecentMessages(chatId, 100);
 
       if (recentMessages.length < 2) {
         await sendTelegram(chatId, `Not enough conversation history yet. Chat more, then try again!`);
