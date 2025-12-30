@@ -94,7 +94,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: 'send_message',
-      description: 'Send a message to a Telegram chat via the Vibbber bot.',
+      description: 'Send a message to a Telegram chat via the Vibbber bot. Messages are stored in Supabase for history.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -105,6 +105,10 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           text: {
             type: 'string',
             description: 'Message text to send (supports Markdown)',
+          },
+          from_instance: {
+            type: 'string',
+            description: 'Your instance name for attribution (e.g., "ideas", "reviewer")',
           },
         },
         required: ['chat_id', 'text'],
@@ -191,6 +195,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const result = await sendTelegram(args.chat_id, args.text);
 
         if (result.ok) {
+          // Store sent message in Supabase for conversation history
+          await supabaseInsert('vibbber_messages', {
+            chat_id: args.chat_id,
+            user_id: 0,
+            username: 'claude_instance',
+            first_name: args.from_instance || 'Claude',
+            text: args.text,
+          });
+
           return {
             content: [{
               type: 'text',
