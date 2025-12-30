@@ -177,7 +177,8 @@ export async function handler(event) {
         `*Vibbber 42* - Self-Improving Bot\n\n` +
         `Chat naturally in your group. When ready to build:\n\n` +
         `Send the rocket emoji to activate me. I'll read the last 100 messages, propose what to build, and wait for your approval.\n\n` +
-        `Other commands:\n` +
+        `Commands:\n` +
+        `/cc <request> - Send request to Claude Code\n` +
         `/status - Check my status\n` +
         `/code - View my source code\n` +
         `/modify <request> - Direct modification`
@@ -205,6 +206,41 @@ export async function handler(event) {
         await sendTelegram(chatId, `My source: ${lines} lines\nhttps://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/blob/main/netlify/functions/webhook.js`);
       } else {
         await sendTelegram(chatId, 'Could not fetch source code.');
+      }
+      return { statusCode: 200, body: 'ok' };
+    }
+
+    // /cc <request> - Send request to Claude Code
+    if (text.startsWith('/cc ') || text.startsWith('/cc@vibbber_bot ')) {
+      const request = text.replace(/^\/cc(@vibbber_bot)? /, '');
+      if (!request.trim()) {
+        await sendTelegram(chatId, 'Usage: `/cc <your request>`');
+        return { statusCode: 200, body: 'ok' };
+      }
+
+      // Store in claude_requests table
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/claude_requests`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            user_id: userId,
+            username,
+            first_name: firstName,
+            request: request.trim(),
+            status: 'pending'
+          })
+        });
+        await sendTelegram(chatId, `📨 Request sent to Claude Code:\n\n_${request.trim()}_\n\nWaiting for response...`);
+      } catch (e) {
+        console.error('Store claude request error:', e);
+        await sendTelegram(chatId, 'Failed to send request. Try again.');
       }
       return { statusCode: 200, body: 'ok' };
     }
