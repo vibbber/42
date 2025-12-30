@@ -178,10 +178,10 @@ export async function handler(event) {
         `Chat naturally in your group. When ready to build:\n\n` +
         `Send the rocket emoji to activate me. I'll read the last 100 messages, propose what to build, and wait for your approval.\n\n` +
         `Commands:\n` +
-        `/cc <request> - Send request to Claude Code\n` +
+        `/cc @name <request> - Send request to Claude Code instance\n` +
+        `/instances - Show connected Claude Code instances\n` +
         `/status - Check my status\n` +
-        `/code - View my source code\n` +
-        `/modify <request> - Direct modification`
+        `/code - View my source code`
       );
       return { statusCode: 200, body: 'ok' };
     }
@@ -206,6 +206,36 @@ export async function handler(event) {
         await sendTelegram(chatId, `My source: ${lines} lines\nhttps://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/blob/main/netlify/functions/webhook.js`);
       } else {
         await sendTelegram(chatId, 'Could not fetch source code.');
+      }
+      return { statusCode: 200, body: 'ok' };
+    }
+
+    // /instances - Show connected Claude Code instances
+    if (text === '/instances' || text === '/instances@vibbber_bot') {
+      try {
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/claude_instances?order=name.asc`,
+          { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
+        );
+        const instances = await response.json();
+
+        if (instances.length === 0) {
+          await sendTelegram(chatId, 'No Claude Code instances registered yet.');
+        } else {
+          let msg = '*Claude Code Instances*\n\n';
+          for (const inst of instances) {
+            const status = inst.status === 'online' ? '🟢' : '⚫';
+            const lastSeen = inst.last_seen ? new Date(inst.last_seen).toLocaleTimeString() : 'never';
+            msg += `${status} *@${inst.name}*\n`;
+            msg += `   ${inst.role || 'No role'}\n`;
+            msg += `   Last seen: ${lastSeen}\n\n`;
+          }
+          msg += '_Use `/cc @name <request>` to call an instance_';
+          await sendTelegram(chatId, msg);
+        }
+      } catch (e) {
+        console.error('Instances error:', e);
+        await sendTelegram(chatId, 'Error fetching instances.');
       }
       return { statusCode: 200, body: 'ok' };
     }
