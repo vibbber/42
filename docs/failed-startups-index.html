@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Failed Startups - PMF Candidates | Vibbber Research</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #c5a3ff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #7ee787;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+
+        .startup-card {
+            background: #252525;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 20px 0;
+            border-left: 3px solid #c5a3ff;
+        }
+
+        .startup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .startup-name {
+            color: #c5a3ff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .startup-funding {
+            color: #58a6ff;
+            font-size: 14px;
+            background: #1e2a3a;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .startup-tagline {
+            color: #7ee787;
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .section-label {
+            color: #888;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            margin-bottom: 6px;
+        }
+
+        .startup-description {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .startup-usp {
+            background: #1e1e1e;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .startup-failure {
+            color: #f0883e;
+            font-size: 13px;
+        }
+
+        .ai-opportunity {
+            background: #1e2a1e;
+            border-left: 3px solid #7ee787;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .ai-opportunity-label {
+            color: #7ee787;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            margin-right: 6px;
+            margin-top: 10px;
+        }
+
+        .tag-pmf { background: #1e3a1e; color: #7ee787; }
+        .tag-hot { background: #3a1e1e; color: #f85149; }
+        .tag-b2c { background: #1e2a3a; color: #58a6ff; }
+        .tag-b2b { background: #3a2a1e; color: #f0883e; }
+        .tag-fintech { background: #2a1e3a; color: #c5a3ff; }
+
+        .key-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .stat {
+            background: #1e1e1e;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .stat-value {
+            color: #c5a3ff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        .summary-box {
+            background: #252525;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .key-stats {
+                grid-template-columns: 1fr;
+            }
+            .startup-header {
+                flex-direction: column;
+            }
+            .startup-funding {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Failed Startups with PMF - Rebuild Candidates</h1>
+    <p class="subtitle">Filtered to startups that had product-market fit or are hot AI rebuild opportunities | January 2026</p>
+
+    <div class="summary-box">
+        <strong>Selection Criteria:</strong>
+        <ul style="margin-left: 20px; margin-top: 10px; font-size: 14px;">
+            <li><span style="color: #7ee787;">HAD PMF</span> - Had real users and traction before failing</li>
+            <li><span style="color: #f85149;">HOT</span> - Business model could be 10x cheaper with AI</li>
+            <li>Failed due to operational costs, not product problems</li>
+            <li>Market still exists (and possibly larger now)</li>
+        </ul>
+    </div>
+
+    <h2>Tier 1: Best Candidates for AI Rebuild</h2>
+
+    <!-- ZIRTUAL -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Zirtual</div>
+            <div class="startup-funding">$5.5M raised</div>
+        </div>
+        <div class="startup-tagline">"Dedicated virtual assistants for busy professionals"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Zirtual provided U.S.-based, college-educated virtual assistants to entrepreneurs and executives. Each customer got a dedicated assistant (not a pool) who learned their preferences over time. Assistants handled email management, scheduling, research, travel booking, expense reports, and personal tasks. They matched clients based on skill requirements, timezone, company type, and personality.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>Dedicated relationship:</strong> Unlike task-based services (Fiverr, TaskRabbit), you got the SAME person who knew your business. <strong>U.S.-based only:</strong> All assistants were American, college-educated - quality positioning. <strong>Subscription model:</strong> $549-$1,699/month for 12-50 hours. No contracts, cancel anytime.
+        </div>
+
+        <div class="key-stats">
+            <div class="stat">
+                <div class="stat-value">$549+</div>
+                <div class="stat-label">Per Month</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">12-50</div>
+                <div class="stat-label">Hours/Month</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">24-48h</div>
+                <div class="stat-label">Onboarding</div>
+            </div>
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Mismanaged funds - shutdown was overnight with no warning. Employees learned via Twitter. Later acquired by Startups.com and relaunched at higher prices.
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            AI assistants can now do 80-90% of what human VAs did: email drafting, calendar management, research, travel booking, expense tracking. The "dedicated relationship" USP can be replicated with personalized AI that learns preferences. Cost drops from ~$45/hour to near-zero marginal cost.
+        </div>
+
+        <span class="tag tag-pmf">HAD PMF</span>
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-b2b">B2B</span>
+    </div>
+
+    <!-- TALLY -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Tally</div>
+            <div class="startup-funding">$172M raised</div>
+        </div>
+        <div class="startup-tagline">"The first app to automate and manage your credit card debt"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Tally was a "robo-advisor for debt." Users linked their credit cards, and Tally automatically made payments using an algorithm that prioritized highest-APR cards first. It extended users a single lower-interest line of credit (7.9%-29.9% APR vs typical 20%+ credit cards), consolidated their debt, and handled all payments. Users made one monthly payment to Tally instead of juggling multiple cards.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>Full automation:</strong> "First company to make full debt automation possible" - you literally do nothing after setup. <strong>Late fee protection:</strong> If you forgot to pay Tally, they'd still pay your cards to prevent fees. <strong>Revenue alignment:</strong> Tally only made money when their APR was LOWER than your cards - aligned incentives. <strong>No fees:</strong> No annual, balance transfer, late, or prepayment fees.
+        </div>
+
+        <div class="key-stats">
+            <div class="stat">
+                <div class="stat-value">$2B+</div>
+                <div class="stat-label">Debt Managed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">7.9-29.9%</div>
+                <div class="stat-label">APR Range</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">580+</div>
+                <div class="stat-label">Min FICO</div>
+            </div>
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Failed pivot to B2B model. Customer complaints about missed payments damaged reputation. Couldn't raise additional funding. Shut down August 2024, acquired by LendingClub/Pagaya in October 2024.
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            The core product was already automated software - failure was execution/business model, not tech. An AI-native rebuild could: better explain decisions to users, proactively optimize across more financial products, and operate with a tiny team. Fintech infra is more mature now (Plaid, etc.).
+        </div>
+
+        <span class="tag tag-pmf">HAD PMF</span>
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-fintech">FINTECH</span>
+    </div>
+
+    <!-- ATRIUM -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Atrium</div>
+            <div class="startup-funding">$75M raised</div>
+        </div>
+        <div class="startup-tagline">"Modern law firm for startups, powered by technology"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Founded by Justin Kan (Twitch co-founder), Atrium was a hybrid: a traditional law firm (Atrium LLP) paired with a tech company (Atrium LTS) that built software to make lawyers more efficient. They offered subscription legal services for startups - flat monthly fees ($2K-$10K) instead of hourly billing. Services included fundraising ($25K-$45K flat), employment law, contracts, and corporate governance.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>Subscription pricing:</strong> "We've done away with hourly billable rates. We don't track hours internally." Predictable costs for startups. <strong>Software-enabled:</strong> Built document management (Records), auto-generated employment offer letters (Hiring), and collaboration tools. <strong>Startup-focused:</strong> Understood YC, fundraising, cap tables - spoke founder language.
+        </div>
+
+        <div class="key-stats">
+            <div class="stat">
+                <div class="stat-value">$2K-$10K</div>
+                <div class="stat-label">Monthly Sub</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">$25K-$45K</div>
+                <div class="stat-label">Per Fundraise</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100+</div>
+                <div class="stat-label">Employees</div>
+            </div>
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Spent millions building bespoke software when off-the-shelf would've worked. Couldn't differentiate enough from traditional firms. Returned money to investors (including a16z) and shut down March 2020.
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            AI can now do contract review, document generation, legal research, and due diligence at a fraction of the cost. A "Legal AI for Startups" could offer: AI-drafted contracts with human lawyer review, automated cap table management, AI-powered fundraising document prep. 90% cost reduction possible.
+        </div>
+
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-b2b">B2B</span>
+    </div>
+
+    <!-- SCALEFACTOR -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">ScaleFactor</div>
+            <div class="startup-funding">$100M+ raised</div>
+        </div>
+        <div class="startup-tagline">"AI-powered accounting that replaces your bookkeeper"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            ScaleFactor promised to automate accounting for small businesses using AI. Built on top of QuickBooks/Xero, it offered automated bookkeeping, payroll, invoicing, tax compliance, bill pay, and financial reporting. Priced $399-$999/month - cheaper than hiring an accountant. Targeted the 19 million U.S. businesses with under 100 employees.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>"Business OS":</strong> Single hub integrating Xero, Gusto, Expensify, Shopify, Salesforce, Bill.com. <strong>AI forecasting:</strong> Machine learning analyzed trends to warn about cash flow issues before they happened. <strong>SMB-focused:</strong> "Tools and insights previously only available to enterprise companies" for small business owners.
+        </div>
+
+        <div class="key-stats">
+            <div class="stat">
+                <div class="stat-value">$399-$999</div>
+                <div class="stat-label">Per Month</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">19M</div>
+                <div class="stat-label">Target Market</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">2014</div>
+                <div class="stat-label">Founded</div>
+            </div>
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            The "AI" was mostly humans in the Philippines. Product quality was poor - customers had to rehire accountants to fix errors. Blamed COVID for shutdown in June 2020, but real issue was the AI didn't actually work.
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            The market need is real - SMBs hate manual accounting. ScaleFactor failed because AI wasn't ready in 2014-2020. NOW it is. Claude/GPT can categorize transactions, reconcile accounts, generate reports, and answer questions about finances. Build what ScaleFactor promised but couldn't deliver.
+        </div>
+
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-b2b">B2B</span>
+        <span class="tag tag-fintech">FINTECH</span>
+    </div>
+
+    <!-- HOMEJOY -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Homejoy</div>
+            <div class="startup-funding">$65M raised</div>
+        </div>
+        <div class="startup-tagline">"Uber for home cleaning - book a professional cleaner in minutes"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Homejoy was a marketplace connecting homeowners with background-checked, tested professional cleaners. Book online in seconds, get matched instantly based on location and availability. Cleaners set their own work zones (drew custom borders on a map). Expanded to 31 cities across US, Canada, UK in just 6 months. Founders actually worked as cleaners for a month to understand the business.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>Engineering approach:</strong> Treated cleaning as an optimization problem - algorithms matched worker availability, travel time, customer preferences. <strong>Quality control:</strong> In-person cleaning tests, extensive background checks, customer ratings. <strong>Low prices:</strong> $20-35/hour, with aggressive first-time discounts ($19 for $85 value).
+        </div>
+
+        <div class="key-stats">
+            <div class="stat">
+                <div class="stat-value">$20-35</div>
+                <div class="stat-label">Per Hour</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">31</div>
+                <div class="stat-label">Cities</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">25%</div>
+                <div class="stat-label">Commission</div>
+            </div>
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Only 15% of discount users became repeat customers. Worker classification lawsuits (employees vs contractors). Cleaners went direct with clients after first booking. High CAC, low retention. Shut down July 2015.
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            The retention problem could be solved with AI: personalized scheduling suggestions, proactive rebooking, preference learning over time. AI customer service instead of expensive support. Better matching algorithms. The core marketplace model is sound - execution needs to be leaner.
+        </div>
+
+        <span class="tag tag-pmf">HAD PMF</span>
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-b2c">B2C</span>
+    </div>
+
+    <!-- CONVOY -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Convoy</div>
+            <div class="startup-funding">$1B+ raised</div>
+        </div>
+        <div class="startup-tagline">"Uber for trucking - digital freight brokerage"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Convoy was a digital freight network that connected truckers with shippers. Founded by ex-Amazon employees, it offered instant quotes, online booking, GPS tracking, automated load suggestions, and a mobile app for fleet management. The "Convoy Go" service let drivers pick up pre-loaded trailers for more flexible scheduling. At peak: 1,000+ employees, $3.8B valuation.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>Automated reloads:</strong> Truckers could book multiple loads at once, reducing empty miles. <strong>Drop-and-hook:</strong> Pre-loaded trailers for faster turnaround - consistently sold out. <strong>Pre-approved carriers:</strong> Quality control through vetting. <strong>Real-time tracking:</strong> Uber-like visibility for shippers.
+        </div>
+
+        <div class="key-stats">
+            <div class="stat">
+                <div class="stat-value">$3.8B</div>
+                <div class="stat-label">Peak Valuation</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">1,000+</div>
+                <div class="stat-label">Employees</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">$828M</div>
+                <div class="stat-label">Total Raised</div>
+            </div>
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Freight recession + tight capital markets. Couldn't sustain operations at scale. Tech acquired by Flexport (Nov 2023), then DAT Solutions (July 2025). The platform still exists under Flexport.
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            Freight matching is fundamentally an optimization problem - perfect for AI. Pricing, route optimization, demand prediction, carrier matching can all be AI-driven. A lean AI-native freight broker could operate with a fraction of Convoy's headcount. B2B logistics is a massive market.
+        </div>
+
+        <span class="tag tag-pmf">HAD PMF</span>
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-b2b">B2B</span>
+    </div>
+
+    <h2>Tier 2: Strong PMF, Moderate AI Opportunity</h2>
+
+    <!-- BRAID -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Braid</div>
+            <div class="startup-funding">$10M raised</div>
+        </div>
+        <div class="startup-tagline">"Shared wallets for groups - your money, our money"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Braid created shared digital wallets ("money pools") for groups. Each pool had its own account/routing number, virtual cards, and debit card. Designed for roommates sharing rent, couples managing household expenses, parents with kids, or friends saving for trips together. Contributors didn't need Braid accounts - just send money to the pool.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>"Our money" vs "my money":</strong> Unlike Venmo (splitting after the fact), Braid was designed for ongoing shared expenses - the money lives together. <strong>Real bank accounts:</strong> Unique routing numbers, not just app balance. <strong>Spending controls:</strong> Limit individual spending, view history, assign card access. <strong>Free:</strong> Revenue from interchange only.
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Sponsor bank issues froze operations mid-2022. Had to migrate to another bank, never recovered momentum. Founders said relying on third-party software was the biggest mistake. Shut down Sept 2023, now building "Pool" as successor.
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            Product was validated - failure was infrastructure, not market. AI could add: smart splitting suggestions, spending insights, proactive alerts. Fintech-as-a-service is more mature now (Unit, Treasury Prime). Lower risk to rebuild with better infra partners.
+        </div>
+
+        <span class="tag tag-pmf">HAD PMF</span>
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-fintech">FINTECH</span>
+    </div>
+
+    <!-- FAST -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Fast</div>
+            <div class="startup-funding">$120M raised</div>
+        </div>
+        <div class="startup-tagline">"One-click checkout for the entire web"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Fast wanted to be your "shopping account for the web." Create an account once, then one-click purchase on any partner site - like Amazon's 1-click but universal. They tracked you across sites using cookies/IP/email. Also offered batch ordering (combine multiple transactions), zero-fraud guarantee for sellers, and didn't sell customer data to advertisers.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>True one-click:</strong> While competitors took 2+ steps, Fast completed orders immediately after clicking the button. <strong>Cross-platform identity:</strong> Works on any browser, device, platform. <strong>Privacy-first:</strong> Didn't funnel data to advertisers unlike competitors. <strong>Seller protection:</strong> Zero fraud guarantee on chargebacks.
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Generated only ~$600K revenue despite hundreds of employees and high-paid executives. Unsustainable burn rate. Shut down April 2022 - "stunning collapse" per TechCrunch.
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            The product concept is solid - checkout friction kills conversions. Fast failed on execution/burn, not product-market fit. A lean AI-native team could build this with 1/10th the headcount. AI handles fraud detection, customer support, merchant onboarding.
+        </div>
+
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-fintech">FINTECH</span>
+    </div>
+
+    <!-- FUZZY -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Fuzzy</div>
+            <div class="startup-funding">$75M raised</div>
+        </div>
+        <div class="startup-tagline">"24/7 pet telehealth - talk to a vet anytime"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Fuzzy was the "first digitally native pet health provider." Users could snap a photo of their sick pet and get triaged by one of 65 veterinarians via 24/7 live chat. Also offered: ship-to-home prescriptions, vet-curated e-commerce, and educational content. $15/month subscription. Positioned as "first stop" before expensive in-person vet visits.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>Always available:</strong> 24/7 access - no waiting for vet appointments. <strong>Triage model:</strong> Helps determine if you NEED an in-person visit, saving money on unnecessary trips. <strong>Full ecosystem:</strong> Advice + prescriptions + products in one app. <strong>Cost savings:</strong> Claimed to save pet parents $750/year on healthcare.
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Abrupt closure with minimal warning - even executives reportedly didn't know timing. Allegations of unpaid debts to creditors, vendors, and employees. Pivoted multiple times (cut 70% of team at one point).
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            Pet telehealth is a huge market (COVID accelerated adoption). AI can handle initial triage, symptom assessment, and basic advice - escalating to human vets only for complex cases. 80% of queries could be AI-handled. Much lower cost structure.
+        </div>
+
+        <span class="tag tag-pmf">HAD PMF</span>
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-b2c">B2C</span>
+    </div>
+
+    <!-- ARTIFACT -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Artifact</div>
+            <div class="startup-funding">Undisclosed (Instagram founders)</div>
+        </div>
+        <div class="startup-tagline">"TikTok for news - AI-personalized reading"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Created by Instagram co-founders Kevin Systrom and Mike Krieger. A personalized news app that used ML to recommend articles based on your reading behavior. "The feed improves every time you read." Features included: AI-rewritten clickbait headlines, AI-generated audio (including Snoop Dogg voice), article summaries in different styles ("Gen Z" or "Explain Like I'm Five"), and social sharing.
+        </div>
+
+        <div class="section-label">Unique Selling Proposition</div>
+        <div class="startup-usp">
+            <strong>Learning algorithm:</strong> Pick 10+ topics, read 25 articles, feed gets smarter. <strong>Anti-clickbait:</strong> Users could flag clickbait headlines, AI would rewrite them. <strong>Quality control:</strong> Only included publishers meeting editorial standards. <strong>Challenge your views:</strong> Algorithm designed to surface content that might challenge previously held views.
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Low user engagement - 100K downloads at launch, dropped to 12K new installs by October 2023. Feature sprawl diluted core value (added places, social posting, etc.). Founders concluded market wasn't big enough. Shut down January 2024, but Systrom says they're "continuing to keep it alive."
+        </div>
+
+        <div class="ai-opportunity">
+            <div class="ai-opportunity-label">AI Rebuild Opportunity</div>
+            The product concept had merit but execution wandered. A focused rebuild could: stick to core news personalization, add better AI summaries/discussion, integrate with workflow tools. News consumption habits have shifted - might be right time with better AI.
+        </div>
+
+        <span class="tag tag-hot">HOT</span>
+        <span class="tag tag-b2c">B2C</span>
+    </div>
+
+    <h2>Tier 3: Had PMF, Less Clear AI Advantage</h2>
+
+    <!-- EAZE -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Eaze</div>
+            <div class="startup-funding">$255M raised</div>
+        </div>
+        <div class="startup-tagline">"Uber for weed - cannabis delivery in minutes"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Eaze connected users with licensed cannabis dispensaries for on-demand delivery. Browse products (flowers, edibles, vapes, concentrates), add to cart, pay, track delivery. Also offered EazeMD - telemedicine for medical marijuana cards. Made 8+ million deliveries. Drivers were W2 employees of partner dispensaries.
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Regulatory challenges, CEO bank fraud scandal, intense competition. High operational costs prevented profitability. Cannabis still federally illegal, limiting growth options.
+        </div>
+
+        <span class="tag tag-pmf">HAD PMF</span>
+        <span class="tag tag-b2c">B2C</span>
+    </div>
+
+    <!-- BOOSTED -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Boosted</div>
+            <div class="startup-funding">$73M raised</div>
+        </div>
+        <div class="startup-tagline">"Premium electric skateboards and scooters"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Boosted made high-quality electric skateboards and later scooters. Known for excellent build quality and loyal fanbase. Products ranged $750-$1,600. Popular with commuters and enthusiasts.
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            Supply chain disruption from tariffs (China trade war). Low hardware margins. Couldn't compete on price with cheaper alternatives flooding the market.
+        </div>
+
+        <span class="tag tag-pmf">HAD PMF</span>
+        <span class="tag tag-b2c">B2C</span>
+    </div>
+
+    <!-- MANDOLIN -->
+    <div class="startup-card">
+        <div class="startup-header">
+            <div class="startup-name">Mandolin</div>
+            <div class="startup-funding">$22M raised</div>
+        </div>
+        <div class="startup-tagline">"Virtual concert platform - live music online"</div>
+
+        <div class="section-label">What They Did</div>
+        <div class="startup-description">
+            Mandolin hosted virtual concerts during COVID when live events were impossible. Artists performed, fans watched from home, paid for tickets. Bridged the gap for entertainment-starved consumers.
+        </div>
+
+        <div class="section-label">Why It Failed</div>
+        <div class="startup-failure">
+            COVID boom ended. In-person events returned, virtual concerts lost relevance. Growth spurt wasn't sustainable. Ceased operations 2023.
+        </div>
+
+        <span class="tag tag-pmf">HAD PMF</span>
+        <span class="tag tag-b2c">B2C</span>
+    </div>
+
+    <div class="summary-box" style="margin-top: 40px;">
+        <strong>Next Steps:</strong>
+        <ol style="margin-left: 20px; margin-top: 10px; font-size: 14px;">
+            <li>Review with Kevin - which 3-5 are most interesting?</li>
+            <li>Deep dive on selected candidates (market size, current competitors, exact failure points)</li>
+            <li>Decision: rebuild one of these vs. build AI-native innovation (Type 3)</li>
+            <li>If rebuild: design app workflow for that specific category</li>
+        </ol>
+    </div>
+
+    <p style="margin-top: 30px; color: #666; font-size: 12px;">
+        Generated: January 14, 2026 | Vibbber Research | Sources: Failory, TechCrunch, CB Insights, Autopsy
+    </p>
+
+</body>
+</html>

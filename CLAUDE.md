@@ -1,209 +1,327 @@
-# Vibbber 42 - Self-Improving Telegram Bot
+# Vibbber - Vibe Coding Venture
 
 ## Project Overview
-A self-improving Telegram bot that can modify its own code based on group chat discussions. Built for vibe coding sessions with friends.
+
+Vibbber is a vibe coding venture studio with a knowledge capture engine at its core.
+
+**The Thesis:** AI tools are commoditized - everyone has access to the same AI. The edge is knowing HOW to use it (10-100x productivity difference). We capture those workflows and distribute them.
+
+**Napkin Sketch:** https://vibbber.com
+
+## Project Structure
+
+```
+Vibbber/
+├── apps/
+│   ├── bot/           # Telegram bot (@vibbber_bot)
+│   └── desktop/       # Knowledge engine (Claude Code wrapper)
+├── docs/              # Planning docs, screenshots
+├── logs/              # Session logs
+└── .env               # Shared credentials
+```
+
+## Apps
+
+### Desktop App (apps/desktop/) - IN DEVELOPMENT
+The core knowledge engine - a wrapper around Claude Code that:
+- Captures workflows automatically from sessions
+- Distributes best workflows to users
+- Ranks vibe coder skill
+- Surfaces top talent for recruitment
+
+**Status:** Not yet started
+
+### Telegram Bot (apps/bot/)
+Community layer - @vibbber_bot for group discussions.
 
 **Bot:** @vibbber_bot
 **Repo:** github.com/vibbber/42
 **Live URL:** https://vibbber.netlify.app
-**Webhook:** https://vibbber.netlify.app/.netlify/functions/webhook
+**Netlify Site ID:** `18f96a15-061a-4dc3-8115-994c2f4e7898`
 
-## How It Works
-1. Add bot to group, make it admin
-2. Chat naturally about what you want to build
-3. Send 🚀 to trigger analysis
-4. Bot reads last 100 messages, proposes what to build
-5. Click 👍 to approve, 👎 to reject
-6. Bot modifies its own code, commits to GitHub, auto-deploys
+See `apps/bot/README.md` for bot-specific docs.
 
-## Tech Stack
-- **Runtime:** Netlify Functions (serverless)
-- **Database:** Supabase (message storage)
-- **LLM:** Configurable (DeepSeek, OpenAI, Kimi)
-- **Version Control:** GitHub (vibbber/42)
-- **Bot Platform:** Telegram Bot API
+## Quick Links
 
-## Quick Commands
+| Resource | URL |
+|----------|-----|
+| Napkin Sketch | https://vibbber.com |
+| Napkin Netlify Site ID | `904115ce-2607-46fd-84aa-16cb02b13c3b` |
+| Telegram Bot | https://t.me/vibbber_bot |
+| Bot Deploy | https://vibbber.netlify.app |
+| GitHub (bot) | github.com/vibbber/42 |
 
-### Deploy Changes
+## Autonomous Development Workflow
+
+### The Golden Rule - ALWAYS Follow This Pattern:
 ```bash
-cd /Users/marcschwyn/Desktop/projects/vibbber
-git add -A && git commit -m "feat: description"
-git push https://vibbber:$GITHUB_TOKEN@github.com/vibbber/42.git main
+1. Make code changes
+2. git add -A && git commit -m "feat: description" && git push origin main
+3. IMMEDIATELY (within 5 seconds) start streaming logs:
+   netlify logs:deploy
+   # Watch until you see "Build script success" or an error
+4. If build fails:
+   - Analyze the error from the logs
+   - Fix the issue immediately
+   - Repeat from step 1
+5. If build succeeds, verify deployment:
+   netlify api listSiteDeploys --data '{"site_id": "SITE_ID"}' | jq '.[0].state'
+   # Must show "ready"
+6. Test the deployed changes
+7. If tests fail:
+   - Debug what's wrong
+   - Fix and repeat from step 1
 ```
 
-### Check Deploy Status
+**NEVER**:
+- Wait to push code "until it's ready"
+- Test only locally
+- Skip deployment verification
+- Leave broken code undeployed
+
+### Real-time Build Monitoring
 ```bash
-curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
-  "https://api.netlify.com/api/v1/sites/18f96a15-061a-4dc3-8115-994c2f4e7898/deploys?per_page=1" \
-  | jq '.[0] | {state, created_at}'
+# Stream deployment logs in real-time
+netlify logs:deploy
+
+# Get deployment details (bot)
+netlify api listSiteDeploys --data '{"site_id": "18f96a15-061a-4dc3-8115-994c2f4e7898"}' | jq '.[0:3]'
+
+# Get deployment details (napkin)
+netlify api listSiteDeploys --data '{"site_id": "904115ce-2607-46fd-84aa-16cb02b13c3b"}' | jq '.[0:3]'
 ```
 
-### Add Netlify Env Var
-```bash
-curl -s -X POST "https://api.netlify.com/api/v1/accounts/695213bc916017ee0bbe33e8/env?site_id=18f96a15-061a-4dc3-8115-994c2f4e7898" \
-  -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
-  -H "Content-Type: application/json" \
-  --data-raw '[{"key":"VAR_NAME","values":[{"context":"all","value":"VAR_VALUE"}]}]'
-```
+### Your Full Permissions
 
-### Set Telegram Webhook
-```bash
-curl "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/setWebhook?url=https://vibbber.netlify.app/.netlify/functions/webhook"
-```
+You have COMPLETE autonomous control:
+
+**Supabase**:
+- ✅ Full management key access (in .env)
+- ✅ Can run ANY Supabase CLI command
+- ✅ Can modify schema, RLS policies, functions
+- ✅ Can access service role for admin operations
+
+**Netlify**:
+- ✅ Full deployment access
+- ✅ Can add/modify environment variables
+- ✅ Can trigger deployments
+- ✅ Can check deployment status
+
+**GitHub**:
+- ✅ Full repository access (vibbber account)
+- ✅ Can push directly to main
+- ✅ Can create branches, PRs
+- ✅ Can manage secrets
+
+**You are expected to work autonomously. Don't ask for permission - just do it!**
 
 ## Environment Variables
 
-### Required (in Netlify)
-| Variable | Description |
-|----------|-------------|
-| `TELEGRAM_BOT_TOKEN` | From @BotFather |
-| `GITHUB_TOKEN` | PAT with repo scope |
-| `GITHUB_OWNER` | `vibbber` |
-| `GITHUB_REPO` | `42` |
-| `SUPABASE_URL` | Supabase project URL |
-| `SUPABASE_SERVICE_KEY` | Supabase service role key |
-| `LLM_PROVIDER` | `deepseek`, `openai`, or `kimi` |
-| `LLM_API_KEY` | API key for chosen provider |
-| `LLM_MODEL` | Model name (e.g., `deepseek-chat`) |
-
-### Local (.env file)
-All credentials stored in `/Users/marcschwyn/Desktop/projects/vibbber/.env`
-
-## Database
-
-### Table: vibbber_messages
-```sql
-CREATE TABLE vibbber_messages (
-  id SERIAL PRIMARY KEY,
-  chat_id BIGINT NOT NULL,
-  user_id BIGINT,
-  username TEXT,
-  first_name TEXT,
-  text TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-CREATE INDEX idx_vibbber_messages_chat_created ON vibbber_messages(chat_id, created_at DESC);
-```
-
-### Table: claude_requests
-```sql
-CREATE TABLE claude_requests (
-  id SERIAL PRIMARY KEY,
-  chat_id BIGINT NOT NULL,
-  user_id BIGINT,
-  username TEXT,
-  first_name TEXT,
-  request TEXT NOT NULL,
-  status TEXT DEFAULT 'pending',
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  responded_at TIMESTAMPTZ
-);
-```
-
-Located in BambooValley Supabase project: `xunccqdrybxpwcvafvag`
-
-## Bot Commands
-- `/start` - Introduction message
-- `/cc <request>` - Send request to Claude Code (via poller)
-- `/status` - Show LLM provider, Supabase status
-- `/code` - Link to source code
-- `/modify <request>` - Direct code modification
-
-## Credentials Summary
-| Service | Account | Notes |
-|---------|---------|-------|
-| Email | vibbber42@gmail.com | Project email |
-| GitHub | vibbber | Has repo `42` |
-| Netlify | vibbber | Site ID: 18f96a15-061a-4dc3-8115-994c2f4e7898 |
-| Telegram | @vibbber_bot | Token in .env |
-| Supabase | (shared) | Using BambooValley project |
-
-## Project Status
-- **Version:** 1.0.0
-- **Last Updated:** December 29, 2025
-- **Status:** Active - needs LLM API key to be fully functional
+Shared credentials in root `.env`:
+- `TELEGRAM_BOT_TOKEN` - Bot token from @BotFather
+- `GITHUB_TOKEN` - PAT for vibbber GitHub account
+- `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` - Database
+- `LLM_PROVIDER` / `LLM_API_KEY` / `LLM_MODEL` - AI provider config
+- `NETLIFY_AUTH_TOKEN` - For deployments
 
 ## Session Logs
 
-Session logs are organized by month with individual files per session.
+Session logs are organized by month in `logs/` with individual files per session for efficient context loading.
 
 **Structure:**
 ```
 logs/
-└── 2025-12/
-    ├── INDEX.md              # One-liner per session
-    └── 01-vibbber-setup.md   # Full session details
+├── 2026-01/          # January 2026
+│   ├── INDEX.md      # One-liner per session
+│   └── NN-title.md   # Individual session files
+├── 2025-12/          # December 2025
+└── ...
 ```
 
 **Looking up past sessions:**
-1. Open `logs/YYYY-MM/INDEX.md` for the relevant month
-2. Find session by one-liner description
-3. Open the full session file for details
+1. Start with latest month's INDEX.md (e.g., `logs/2026-01/INDEX.md`)
+2. Scan one-liners to find relevant session
+3. Open just that session file for full details
 
-## Wrap Protocol
+## Session Management
 
-When wrapping a session:
+### Wrap Protocol
+When the user says **"WRAP"** or "wrap this session", perform end-of-session cleanup:
 
-1. **Determine Session Number:** Check `logs/YYYY-MM/INDEX.md`, find highest number, add 1
-2. **Create Session Log:** `logs/YYYY-MM/NN-short-title.md` with summary, changes, next steps
-3. **Update Monthly Index:** Add one-liner to `logs/YYYY-MM/INDEX.md`
-4. **Inform User:** "Session N wrapped successfully"
-5. **Commit & Push:** All changes to GitHub
+1. **Determine Session Number:**
+   - Read `logs/YYYY-MM/INDEX.md` for current month
+   - Find highest session number, add 1
 
-## Autonomous Development Workflow
+2. **Create Session Log File:**
+   - File: `logs/YYYY-MM/NN-short-title.md`
+   - Example: `logs/2026-01/05-desktop-app-mvp.md`
+   - Include: Summary, changes made, decisions, next steps
 
-### The Golden Rule
+3. **Update Monthly Index:**
+   - Add one-liner to `logs/YYYY-MM/INDEX.md`
+   - Format: `05: Desktop app MVP and initial testing`
+
+4. **Inform User:**
+   - Tell user: "Session N wrapped successfully"
+
+5. **Commit & Push:**
+   - If applicable, commit changes to git
+
+### Mid-Task WRAP
+If wrapping during incomplete work:
+- Add "Next Session Notes" section to session log
+- Document: current progress, next steps, important context
+
+### Other Session Rules
+- **File deprecation**: Mark old files immediately when creating new versions with reason
+- **Incomplete work**: Document current state and next steps in session logs
+
+## Autonomous Working Principles
+
+### ✅ ALWAYS Do Without Asking:
+- Deploy to production (for prototyping/MVP stages)
+- Fix bugs and errors
+- Run tests and diagnostics
+- Create automation scripts
+- Update documentation
+- Add console.log statements for debugging
+- Create backup branches
+- Try up to 10 different approaches to solve problems
+- Update dependencies if needed
+- Create new API endpoints
+- Modify database schema for features
+- Implement security best practices
+- **Open HTML/mockup files in browser after creating them** (use `open` command)
+
+### ❌ ALWAYS Ask Before:
+- Deleting user data
+- Major architectural refactors
+- Rolling back deployed changes
+- Setting up paid services
+- Changing core business logic
+- Removing existing features
+- Modifying authentication flow
+
+### 🤔 Use Judgment For:
+- Performance optimizations (minor = do, major = ask)
+- UI/UX changes (small = do, significant = ask)
+- New dependencies (common = do, unusual = ask)
+
+## Development Rules
+
+### Critical Rules (NEVER BREAK THESE):
+1. **Never create fallback systems** without explicit request
+2. **Always create backup** before major changes
+3. **Do only what's asked** - nothing more, nothing less
+4. **Never create files** unless absolutely necessary
+5. **Always prefer editing** existing files to creating new ones
+6. **API keys go in .env file** - never in code or CLAUDE.md
+7. **Never proactively create documentation files** unless requested
+
+### File Management:
+- Mark deprecated files immediately in CLAUDE.md
+- Use git branches for major changes
+- Keep todo list updated in real-time
+- Document file purposes clearly
+
+### Testing Approach:
+- Always verify in browser first
+- Create automated tests for critical paths
+- Test edge cases and error states
+- Document test scenarios
+
+## The Sunbeam Debugging Protocol
+When debugging issues, follow this systematic 5-step approach:
+
+### Step 1: Browser Testing (Always First!)
+- Manually reproduce the issue in browser
+- Note exact steps to reproduce
+- Take screenshots/record console errors
+- Never claim something works without verification
+
+### Step 2: Investigate Root Cause
+- Trace data flow through components
+- Check API responses
+- Verify state management
+- Identify exact failure point
+
+### Step 3: Implement Minimal Fix
+- Fix only what's broken
+- Avoid refactoring unless necessary
+- Test fix immediately
+- Document any assumptions
+
+### Step 4: Verify with Automation
+- Create browser automation test
+- Verify fix works consistently
+- Test edge cases
+- Ensure no regressions
+
+### Step 5: Document Everything
+- Update CLAUDE.md immediately
+- Note what was broken and why
+- Document the fix approach
+- Update test documentation
+
+## Deployment Information
+
+### Napkin Sketch (vibbber.com)
+**Netlify Site ID:** `904115ce-2607-46fd-84aa-16cb02b13c3b`
+**Live URL:** https://vibbber.com
+**Deploy folder:** `/Users/marcschwyn/Desktop/projects/BambooValley/vibe-coding/`
+
+**Deploy command:**
 ```bash
-1. Make code changes
-2. git add -A && git commit -m "feat: description"
-3. git push https://vibbber:$GITHUB_TOKEN@github.com/vibbber/42.git main
-4. Netlify auto-deploys (check status if needed)
-5. Test the deployed changes
-6. If broken, fix and repeat
+cp /Users/marcschwyn/Desktop/projects/BambooValley/vibe-coding-napkin.html /Users/marcschwyn/Desktop/projects/BambooValley/vibe-coding/index.html && netlify deploy --prod --site 904115ce-2607-46fd-84aa-16cb02b13c3b --dir /Users/marcschwyn/Desktop/projects/BambooValley/vibe-coding
 ```
 
-**Note:** Use the vibbber GitHub token for pushes (stored in .env)
+### Telegram Bot (vibbber.netlify.app)
+**GitHub Repository:** github.com/vibbber/42
+**Netlify Site ID:** `18f96a15-061a-4dc3-8115-994c2f4e7898`
+**Live URL:** https://vibbber.netlify.app
+**Webhook:** https://vibbber.netlify.app/.netlify/functions/webhook
 
-## Claude Code Integration
-
-### MCP Server
-The MCP server lets Claude Code read Telegram messages and respond directly.
-
-**Location:** `mcp/index.js`
-**Config:** `.mcp.json` (project-level, auto-loaded by Claude Code)
-
-| Tool | Description |
-|------|-------------|
-| `get_messages` | Fetch recent messages from Supabase (default 50, max 200) |
-| `get_chats` | List all chat IDs that have messaged the bot |
-| `send_message` | Send a message to any chat via Telegram |
-
-### Telegram → Claude Code (tmux + poller)
-Users can send `/cc <request>` in Telegram to wake up a Claude Code session.
-
-**Setup:**
+**Deploy (auto via GitHub):**
 ```bash
-# Terminal 1: Start Claude Code in tmux
-tmux new -s claude
-cd /Users/marcschwyn/Desktop/projects/Vibbber
-claude
-
-# Terminal 2: Start the poller
-cd /Users/marcschwyn/Desktop/projects/Vibbber
-node mcp/poller.js
+cd apps/bot
+git add -A && git commit -m "feat: description"
+git push https://vibbber:$GITHUB_TOKEN@github.com/vibbber/42.git main
 ```
 
-**Flow:**
-1. User sends `/cc what files handle approvals?` in Telegram
-2. Bot stores request in `claude_requests` table, confirms receipt
-3. Poller detects new request, injects into tmux session
-4. Claude Code processes, responds via MCP `send_message` tool
+### Desktop App (apps/desktop/) - TBD
+To be set up when development begins.
+
+## Credentials Summary
+
+| Service | Account | Notes |
+|---------|---------|-------|
+| Email | vibbber42@gmail.com | Project email |
+| GitHub | vibbber | Has repo `42` |
+| Netlify | vibbber | Multiple sites |
+| Telegram | @vibbber_bot | Token in .env |
+| Supabase | (shared) | Using BambooValley project |
 
 ## Roadmap
-1. [x] Basic bot with self-modification
-2. [x] Message storage in Supabase
-3. [x] Rocket trigger + approval flow
-4. [x] MCP server for Claude Code integration
-5. [ ] Get working LLM API key
-6. [ ] Full approval → implementation flow
+
+### Phase 1: Build the Desktop App (2 weeks)
+- [ ] Define MVP feature set
+- [ ] Build first prototype
+- [ ] Test with initial experts
+- [ ] Launch Telegram community alongside
+
+### Phase 2: Open the Villa
+- [ ] First cohort (~10 people)
+- [ ] Project pipeline ready
+- [ ] Talent sourcing from app + network
+
+## Project Status
+- **Version:** 0.1.0
+- **Last Updated:** January 14, 2026
+- **Status:** Strategic planning complete, failed startups research done
+- **Recent:** Session 01 - Strategic discussion, 12 PMF candidates researched, hamburger nav added to vibbber.com
+- **Next:** Review candidates with Kevin, decide Type 1 vs Type 3, then build app
+
+## Key Resources
+- **Strategic Discussion:** `docs/session-167-strategic-discussion.md` - Full capture of app architecture, three project types, companion model, interview→match pattern
+- **Failed Startups Research:** https://vibbber.com/failed-startup-list.html - 12 candidates with detailed analysis
+- **Workflow #1:** `docs/workflow-landing-page-design.html` - First skill document

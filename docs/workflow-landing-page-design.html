@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow #1: Landing Page Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #c5a3ff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        h2 {
+            color: #a0a0a0;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: #c5a3ff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        li li {
+            margin-top: 6px;
+            color: #a0a0a0;
+        }
+
+        .highlight {
+            color: #7ee787;
+        }
+
+        .accent {
+            color: #c5a3ff;
+        }
+
+        .warning {
+            color: #f0883e;
+        }
+
+        .step {
+            background: #252525;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 3px solid #c5a3ff;
+        }
+
+        .step-number {
+            color: #c5a3ff;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .step-title {
+            color: #e0e0e0;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .tool-tag {
+            display: inline-block;
+            background: #333;
+            color: #7ee787;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-right: 6px;
+        }
+
+        .tip {
+            background: #1e2a1e;
+            border-left: 3px solid #7ee787;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .tip-label {
+            color: #7ee787;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        code {
+            background: #333;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 13px;
+        }
+
+        .workflow-meta {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 30px;
+        }
+
+        @media print {
+            body {
+                background: #1a1a1a !important;
+                color: #e0e0e0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Workflow #1: Landing Page Design</h1>
+
+    <p class="workflow-meta">
+        <span class="accent">Category:</span> Design &amp; Branding |
+        <span class="accent">Time:</span> 2-4 hours |
+        <span class="accent">Output:</span> Production-ready landing page
+    </p>
+
+    <p>Transform a project idea into a polished, professional landing page using AI-assisted research, design generation, and asset creation.</p>
+
+    <h2>Step 1: Competitive Research</h2>
+
+    <div class="step">
+        <div class="step-number">Research Phase</div>
+        <div class="step-title">Find the best existing examples</div>
+        <p><span class="tool-tag">Claude</span></p>
+        <ul>
+            <li>Ask Claude to research businesses similar to your project</li>
+            <li>Get a list of 10-15 comparable products/services</li>
+            <li>Review each one - note what works in terms of:
+                <ul>
+                    <li>Visual design and aesthetics</li>
+                    <li>Information hierarchy</li>
+                    <li>Call-to-action placement</li>
+                    <li>Feature presentation</li>
+                </ul>
+            </li>
+            <li><span class="highlight">Pick the top 2-3 that feel right</span></li>
+        </ul>
+    </div>
+
+    <h2>Step 2: Design Direction</h2>
+
+    <div class="step">
+        <div class="step-number">Visual Exploration</div>
+        <div class="step-title">Generate initial design concepts</div>
+        <p><span class="tool-tag">Claude</span> <span class="tool-tag">Midjourney</span></p>
+        <ul>
+            <li>Give your top picks back to Claude</li>
+            <li>Ask Claude to generate <span class="accent">Midjourney prompts</span> based on these references</li>
+            <li>Run 10-20 prompts in Midjourney</li>
+            <li>Look for the visual style that resonates</li>
+            <li><span class="highlight">Select 2-3 directions you like</span></li>
+        </ul>
+    </div>
+
+    <div class="tip">
+        <div class="tip-label">Why Midjourney?</div>
+        Midjourney is currently the best tool for getting an early design feel. It captures mood, style, and aesthetic direction faster than any other approach.
+    </div>
+
+    <h2>Step 3: Brand Kit Development</h2>
+
+    <div class="step">
+        <div class="step-number">Iteration Phase</div>
+        <div class="step-title">Develop comprehensive brand kit</div>
+        <p><span class="tool-tag">Claude (subagent)</span></p>
+        <ul>
+            <li>Give your selected design direction back to Claude</li>
+            <li>Ask for <span class="accent">5-10 brand kit variations</span></li>
+            <li class="warning">Important: Use a subagent or separate instance to avoid filling your main context window</li>
+            <li>Iterate in rounds:
+                <ul>
+                    <li><strong>Round 1:</strong> General design direction (colors, typography, mood)</li>
+                    <li><strong>Round 2:</strong> Individual features (buttons, cards, headers)</li>
+                    <li><strong>Round 3:</strong> Specific components as needed</li>
+                </ul>
+            </li>
+            <li>Spin up additional instances for parallel exploration if needed</li>
+        </ul>
+    </div>
+
+    <h2>Step 4: Asset Creation</h2>
+
+    <div class="step">
+        <div class="step-number">Production Phase</div>
+        <div class="step-title">Create and prepare visual assets</div>
+        <p><span class="tool-tag">Claude</span> <span class="tool-tag">Midjourney</span> <span class="tool-tag">Photoshop</span></p>
+        <ul>
+            <li>Claude generates individual HTML mockups for each section</li>
+            <li>For custom assets (backdrops, illustrations, hero images):
+                <ul>
+                    <li>Ask Claude for Midjourney prompts</li>
+                    <li>Generate in Midjourney</li>
+                    <li>Download the ones you like</li>
+                </ul>
+            </li>
+            <li>Use Photoshop to:
+                <ul>
+                    <li>Crop out backgrounds (fastest method)</li>
+                    <li>Clean up edges</li>
+                    <li>Export in correct formats</li>
+                </ul>
+            </li>
+            <li>Save everything to an <code>/assets</code> folder that Claude can access</li>
+        </ul>
+    </div>
+
+    <h2>Step 5: Final Assembly</h2>
+
+    <div class="step">
+        <div class="step-number">Build Phase</div>
+        <div class="step-title">Assemble the final landing page</div>
+        <p><span class="tool-tag">Claude</span></p>
+        <ul>
+            <li>Finalize the brand kit based on all iterations</li>
+            <li>Claude builds the complete landing page using:
+                <ul>
+                    <li>The finalized brand kit</li>
+                    <li>All assets from <code>/assets</code> folder</li>
+                    <li>Best practices from your research</li>
+                </ul>
+            </li>
+            <li><span class="highlight">Result: Production-ready landing page</span></li>
+        </ul>
+    </div>
+
+    <div class="tip">
+        <div class="tip-label">Context Window Management</div>
+        The key to this workflow is keeping your main Claude instance clean. Use subagents for:
+        <ul style="margin-top: 8px; margin-bottom: 0;">
+            <li>Brand kit iterations (5-10 variations each round)</li>
+            <li>Individual component design</li>
+            <li>Asset prompt generation</li>
+        </ul>
+        Your main instance stays focused on decisions and final assembly.
+    </div>
+
+    <h2>Folder Structure</h2>
+
+    <div class="step">
+        <div class="step-title">Recommended project setup</div>
+        <pre style="background: #1a1a1a; padding: 15px; border-radius: 4px; font-size: 12px; overflow-x: auto;">
+project-name/
+├── research/
+│   └── competitors.md       # Notes on researched businesses
+├── design/
+│   ├── midjourney/          # Saved Midjourney outputs
+│   ├── mockups/             # HTML section mockups
+│   └── brand-kit.md         # Final brand decisions
+├── assets/
+│   ├── images/              # Processed images
+│   ├── icons/               # Icon assets
+│   └── backgrounds/         # Background images
+└── output/
+    └── index.html           # Final landing page
+        </pre>
+    </div>
+
+</body>
+</html>
